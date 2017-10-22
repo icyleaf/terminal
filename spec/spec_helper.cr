@@ -1,2 +1,2 @@
 require "spec"
-require "../src/terminal_ui"
+require "../src/terminal/ui"
