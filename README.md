@@ -32,16 +32,18 @@ Terminal::UI.command "crystal version" # => "\e[36m$ crystal version\e[0m"
 
 ### Methods
 
+Full methods below:
+
 method | level | description
 ---|---|---
-header | `INFO` | normal default color with table border (Not compatible with emoji)
+header | `INFO` | normal default color with table border (Not compatible with emoji)<br />+-----+<br />\|Install\|<br />+-----+
 message | `INFO` | normal default color
-success | `INFO` | green color
-important | `WARN` | yellow color
-error | `ERROR` | red color
+success | `INFO` | <span style="color:green">green color</span>
+important | `WARN` | <span style="color:yellow">yellow color</span>
+error | `ERROR` | <span style="color:red">red color</span>
 verbose | `DEBUG` | normal default color
-deprecated | `WARN` | blue with bold color
-command | `INFO` | cyan color
+deprecated | `WARN` | <span style="color:blue;font-weight:bold">blue with bold color</span>
+command | `INFO` | <span style="color:cyan">cyan color</span>
 crash | Exception | normal default color
 
 ### Enable/Disable color
