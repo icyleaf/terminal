@@ -1,4 +1,10 @@
-# terminal-ui
+# 💎 terminal-ui
+
+[![Tag](https://img.shields.io/github/tag/icyleaf/terminal-ui.cr.svg)](https://github.com/icyleaf/terminal-ui.cr/blob/master/CHANGELOG.md)
+[![Dependency Status](https://shards.rocks/badge/github/icyleaf/terminal-ui.cr/status.svg)](https://shards.rocks/github/icyleaf/terminal-ui.cr)
+[![devDependency Status](https://shards.rocks/badge/github/icyleaf/terminal-ui.cr/dev_status.svg)](https://shards.rocks/github/icyleaf/terminal-ui.cr)
+[![Build Status](https://img.shields.io/circleci/project/github/icyleaf/terminal-ui.cr/master.svg?style=flat)](https://circleci.com/gh/icyleaf/terminal-ui.cr)
+[![License](https://img.shields.io/github/license/icyleaf/terminal-ui.cr.svg)](https://github.com/icyleaf/terminal-ui.cr/blob/master/LICENSE)
 
 Terminal output styling with intuitive, clean and easy API written by Crystal.
 
