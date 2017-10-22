@@ -38,12 +38,12 @@ method | level | description
 ---|---|---
 header | `INFO` | normal default color with table border (Not compatible with emoji)<br />+-----+<br />\|Install\|<br />+-----+
 message | `INFO` | normal default color
-success | `INFO` | <span style="color:green">green color</span>
-important | `WARN` | <span style="color:yellow">yellow color</span>
-error | `ERROR` | <span style="color:red">red color</span>
+success | `INFO` | <label style="color:green">green color</label>
+important | `WARN` | <label style="color:yellow">yellow color</label>
+error | `ERROR` | <label style="color:red">red color</label>
 verbose | `DEBUG` | normal default color
-deprecated | `WARN` | <span style="color:blue;font-weight:bold">blue with bold color</span>
-command | `INFO` | <span style="color:cyan">cyan color</span>
+deprecated | `WARN` | <label style="color:blue;font-weight:bold">blue with bold color</label>
+command | `INFO` | <label style="color:cyan">cyan color</label>
 crash | Exception | normal default color
 
 ### Enable/Disable color
