@@ -66,9 +66,11 @@ All the output based on `Logger`, Here support one way to custom the given io an
 ```crystal
 io = IO::Memory.new
 Terminal::UI.logger_io(io, Logger::Formatter.new { |severity, datetime, progname, message, io|
-  io << "#{datetime.to_s("%H:%M:%S")} "
-  io << message
+  io << "VERBOSE" << datetime.to_s("%F") << message
 })
+
+Terminal::UI.message "Welcome to use terminal-ui"
+# => "VERBOSE 2017-10-22 Welcome to use terminal-ui"
 ```
 
 ## Contributing
