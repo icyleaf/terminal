@@ -1,10 +1,8 @@
 # 💎 terminal-ui
 
+[![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
 [![Tag](https://img.shields.io/github/tag/icyleaf/terminal-ui.cr.svg)](https://github.com/icyleaf/terminal-ui.cr/blob/master/CHANGELOG.md)
-[![Dependency Status](https://shards.rocks/badge/github/icyleaf/terminal-ui.cr/status.svg)](https://shards.rocks/github/icyleaf/terminal-ui.cr)
-[![devDependency Status](https://shards.rocks/badge/github/icyleaf/terminal-ui.cr/dev_status.svg)](https://shards.rocks/github/icyleaf/terminal-ui.cr)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/terminal-ui.cr/master.svg?style=flat)](https://circleci.com/gh/icyleaf/terminal-ui.cr)
-[![License](https://img.shields.io/github/license/icyleaf/terminal-ui.cr.svg)](https://github.com/icyleaf/terminal-ui.cr/blob/master/LICENSE)
 
 Terminal output styling with intuitive, clean and easy API written by Crystal.
 
@@ -73,14 +71,21 @@ Terminal::UI.message "Welcome to use terminal-ui"
 # => "VERBOSE 2017-10-22 Welcome to use terminal-ui"
 ```
 
-## Contributing
+## How to Contribute
 
-1. Fork it ( https://github.com/icyleaf/terminal-ui.cr/fork )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create a new Pull Request
+Your contributions are always welcome! Please submit a pull request or create an issue to add a new question, bug or feature to the list.
 
-## Contributors
+All [Contributors](https://github.com/icyleaf/terminal-ui.cr/graphs/contributors) are on the wall.
 
-- [icyleaf](https://github.com/icyleaf) - creator, maintainer
+## You may also like
+
+- [halite](https://github.com/icyleaf/halite) - HTTP Requests Client with a chainable REST API, built-in sessions and loggers.
+- [totem](https://github.com/icyleaf/totem) - Load and parse a configuration file or string in JSON, YAML, dotenv formats.
+- [markd](https://github.com/icyleaf/markd) - Yet another markdown parser built for speed, Compliant to CommonMark specification.
+- [poncho](https://github.com/icyleaf/poncho) - A .env parser/loader improved for performance.
+- [popcorn](https://github.com/icyleaf/popcorn) - Easy and Safe casting from one type to another.
+- [fast-crystal](https://github.com/icyleaf/fast-crystal) - 💨 Writing Fast Crystal 😍 -- Collect Common Crystal idioms.
+
+## License
+
+[MIT License](https://github.com/icyleaf/terminal-ui.cr/blob/master/LICENSE) © icyleaf
