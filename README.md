@@ -79,7 +79,7 @@ All [Contributors](https://github.com/icyleaf/terminal-ui.cr/graphs/contributors
 
 ## You may also like
 
-- [halite](https://github.com/icyleaf/halite) - HTTP Requests Client with a chainable REST API, built-in sessions and loggers.
+- [halite](https://github.com/icyleaf/halite) - HTTP Requests Client with a chainable REST API, built-in sessions and middlewares.
 - [totem](https://github.com/icyleaf/totem) - Load and parse a configuration file or string in JSON, YAML, dotenv formats.
 - [markd](https://github.com/icyleaf/markd) - Yet another markdown parser built for speed, Compliant to CommonMark specification.
 - [poncho](https://github.com/icyleaf/poncho) - A .env parser/loader improved for performance.
