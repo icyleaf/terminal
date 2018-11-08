@@ -1,8 +1,8 @@
-# 💎 terminal-ui
+# Terminal
 
 [![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
-[![Tag](https://img.shields.io/github/tag/icyleaf/terminal-ui.cr.svg)](https://github.com/icyleaf/terminal-ui.cr/blob/master/CHANGELOG.md)
-[![Build Status](https://img.shields.io/circleci/project/github/icyleaf/terminal-ui.cr/master.svg?style=flat)](https://circleci.com/gh/icyleaf/terminal-ui.cr)
+[![Tag](https://img.shields.io/github/tag/icyleaf/terminal.svg)](https://github.com/icyleaf/terminal/blob/master/CHANGELOG.md)
+[![Build Status](https://img.shields.io/circleci/project/github/icyleaf/terminal/master.svg?style=flat)](https://circleci.com/gh/icyleaf/terminal)
 
 Terminal output styling with intuitive, clean and easy API written by Crystal.
 
@@ -12,23 +12,26 @@ Add this to your application's `shard.yml`:
 
 ```yaml
 dependencies:
-  terminal-ui:
-    github: icyleaf/terminal-ui.cr
+  terminal:
+    github: icyleaf/terminal
 ```
 
 ## Usage
 
-```crystal
-require "terminal/ui"
+### UI
 
-Terminal::UI.message "hello world" # => "hello world"
-Terminal::UI.success "well done" # => "\e[32mwell done\e[0m"
-Terminal::UI.important "Your password is too easy" # => "\e[33mYour password is too easy\e[0m"
-Terminal::UI.error "Invaild username or password" # => "\e[31mInvaild username or password\e[0m"
-Terminal::UI.command "crystal version" # => "\e[36m$ crystal version\e[0m"
+```crystal
+require "terminal"
+
+# Usage for Shell UI
+Terminal.message "hello world" # => "hello world"
+Terminal.success "well done" # => "\e[32mwell done\e[0m"
+Terminal.important "Your password is too easy" # => "\e[33mYour password is too easy\e[0m"
+Terminal.error "Invaild username or password" # => "\e[31mInvaild username or password\e[0m"
+Terminal.command "crystal version" # => "\e[36m$ crystal version\e[0m"
 ```
 
-### Methods
+#### Methods
 
 Full methods below:
 
@@ -42,18 +45,35 @@ error | `ERROR` | <label style="color:red">red color</label>
 verbose | `DEBUG` | normal default color
 deprecated | `WARN` | <label style="color:blue;font-weight:bold">blue with bold color</label>
 command | `INFO` | <label style="color:cyan">cyan color</label>
-crash | Exception | normal default color
+command_output | `INFO` | <label style="color:magenta">magenta color</label>
+crash! | Terminal::Crash | an exception by program itself
+user_error! | Terminal::UserError | an exception by user opertions
+shell_error! | Terminal::ShellError | an exception by run shell command
+
+### Shell command
+
+```
+require "terminal"
+
+# Check command result
+Terminal.test "crystal" # => true
+
+# Run shell command
+Terminal.sh "pwd"
+$ pwd
+▸ /Users/icyleaf
+```
 
 ### Enable/Disable color
 
-`Terminal::UI.enable_color`/`Terminal::UI.disable_color`
+`Terminal.enable_color`/`Terminal.disable_color`
 
 ### Verbose mode
 
 Set Enviroment `TERMINAL_UI_SHOW_TIMESTAMP` to `1/true`
 
 ```crystal
-Terminal::UI.success "Installed successful"
+Terminal.success "Installed successful"
 # => "INFO 2017-10-22 12:45:33 \e[32mInstalled successful\e[0m"
 ```
 
@@ -63,11 +83,11 @@ All the output based on `Logger`, Here support one way to custom the given io an
 
 ```crystal
 io = IO::Memory.new
-Terminal::UI.logger_io(io, Logger::Formatter.new { |severity, datetime, progname, message, io|
+Terminal.ui_logger(io, Logger::Formatter.new { |severity, datetime, progname, message, io|
   io << "VERBOSE" << datetime.to_s("%F") << message
 })
 
-Terminal::UI.message "Welcome to use terminal-ui"
+Terminal.message "Welcome to use terminal-ui"
 # => "VERBOSE 2017-10-22 Welcome to use terminal-ui"
 ```
 

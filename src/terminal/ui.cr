@@ -5,40 +5,6 @@ require "./constants"
 class Terminal::UI
   property logger
 
-  # Returns the instance type of this type.
-  #
-  # ```
-  # TerminalUI.instance.logger.level = Logger::DEBUG
-  # TerminalUI.instance.disable_color
-  # ```
-  def self.instance
-    @@instance ||= new
-  end
-
-  {% for method in [:message, :success, :important, :error, :verbose, :crash, :header, :deprecated, :command] %}
-    # Same as `{{method.id}}(message)`.
-    #
-    # ```
-    # TerminalUI.{{method.id}}("{{method.id}}")
-    # ```
-    def self.{{method.id}}(message)
-      instance.{{method.id}}(message)
-    end
-  {% end %}
-
-  {% for method in [:disable_color, :enable_color] %}
-    # Same as `{{method.id}}`.
-    def self.{{method.id}}
-      instance.{{method.id}}
-    end
-  {% end %}
-
-  def self.logger_io(io, formatter = instance.default_logger_formatter)
-    instance.logger = Logger.new(io)
-    instance.logger.level = Logger::DEBUG
-    instance.logger.formatter = formatter
-  end
-
   # Creates a new TerminalUI that will show message to the given io. If io is nil then all message calls will be silently ignored.
   #
   # Set the level only messages at that level of higher will be printed.
@@ -61,9 +27,7 @@ class Terminal::UI
   # TerminalUI.new(logger_io, logger_formatter)
   # ```
   def initialize(logger_io = STDOUT, logger_formatter = default_logger_formatter)
-    @logger = Logger.new(logger_io)
-    @logger.formatter = logger_formatter
-    @logger.level = Logger::DEBUG
+    @logger = Logger.new(logger_io, Logger::DEBUG, logger_formatter)
   end
 
   # Print a header a text in a box
@@ -128,16 +92,41 @@ class Terminal::UI
     @logger.warn(message.to_s.colorize.blue.bold)
   end
 
+  # Level Command: Print out a terminal command that is being
   def command(message)
     @logger.info("$ #{message}".colorize.cyan)
   end
 
-  # Pass an exception to this method to exit the program
-  #   using the given exception
+  # Level Command Output: Print the output of a command with
+  def command_output(message)
+    message.split("\n").each do |line|
+      prefix = line.includes?("▸") ? "" : "▸ "
+      @logger.info("#{prefix}#{line.colorize.magenta}")
+    end
+  end
+
+  # Pass an exception to this method to exit the program using the given exception
   # Use this method instead of user_error! if this error is
   # unexpected, e.g. an invalid server response that shouldn't happen
-  def crash(message)
-    raise Terminal::UI::Crash.new(message.to_s)
+  def crash!(message)
+    raise Crash.new(message.to_s)
+  end
+
+  # Use this method to exit the program because of an user error
+  def user_error!(message)
+    raise UserError.new(message)
+  end
+
+  # Use this method to exit the program because of a shell command failure –
+  # the command returned a non-zero response.
+  #
+  # This does not specify the nature of the error.
+  # The error might be from a programming error, a user error.
+  # Because of this, when these errors occur, it means that the caller of
+  # the shell command did not adequate error handling and the caller error
+  # handling should be improved.
+  def shell_error!(message)
+    raise ShellError.new(message)
   end
 
   # Enable text colorful in STDOUT TTY
@@ -184,9 +173,5 @@ class Terminal::UI
     end
 
     res = res < 0 ? 0 : res
-  end
-
-  # raised from crash!
-  class Crash < Exception
   end
 end
