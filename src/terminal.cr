@@ -3,6 +3,7 @@ require "./terminal/*"
 module Terminal
   class Error < Exception; end
   class ShellError < Error; end
+  class UserError < Error; end
   class Crash < Error; end
 
   {% for method in [:message, :success, :important, :error, :verbose, :header, :deprecated, :command, :command_output, :crash!, :user_error!, :shell_error!] %}
