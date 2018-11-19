@@ -24,8 +24,8 @@ module Terminal
     end
   {% end %}
 
-  def self.sh(*args, print_command = true, print_command_output = true)
-    command.run(*args, print_command: print_command, print_command_output: print_command_output)
+  def self.sh(*args, print_command = true, print_command_output = true, throw_error = false)
+    command.run(*args, print_command: print_command, print_command_output: print_command_output, throw_error: throw_error)
   end
 
   def self.test(*args)

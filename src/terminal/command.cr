@@ -1,26 +1,23 @@
 module Terminal
   class Command
-    def self.run(*args, print_command = true, print_command_output = true)
-      new.run(*args, print_command: print_command, print_command_output: print_command_output)
+    def self.run(*args, print_command, print_command_output, throw_error)
+      new.run(*args, print_command: print_command, print_command_output: print_command_output, throw_error: throw_error)
     end
 
-    def self.run(*args, print_command = true, print_command_output = true, &block)
-      run(*args, print_command: print_command, print_command_output: print_command_output, &block)
+    def self.run(*args, print_command, print_command_output, throw_error, &block)
+      run(*args, print_command: print_command, print_command_output: print_command_output, throw_error: throw_error, &block)
     end
 
     def self.test(*args)
       new.test(*args, false, false)
     end
 
-    def initialize
+    def run(*args, print_command, print_command_output, throw_error)
+      perform_command(*args, print_command: print_command, print_command_output: print_command_output, throw_error: throw_error)
     end
 
-    def run(*args, print_command = true, print_command_output = true)
-      perform_command(*args, print_command: print_command, print_command_output: print_command_output)
-    end
-
-    def run(*args, print_command = true, print_command_output = true)
-      yield perform_command(*args, print_command: print_command, print_command_output: print_command_output)
+    def run(*args, print_command, print_command_output, throw_error)
+      yield run(*args, print_command: print_command, print_command_output: print_command_output, throw_error: throw_error)
     end
 
     def test(*args)
@@ -28,16 +25,16 @@ module Terminal
       exec_command(shell_command).success?
     end
 
-    private def perform_command(*args, print_command, print_command_output)
+    private def perform_command(*args, print_command, print_command_output, throw_error)
       shell_command = prepare_command(*args)
       Terminal.command shell_command if print_command
 
       result = exec_command(shell_command)
-      if result.failure?
+      if result.failure? && throw_error
         Terminal.shell_error! result.error
       end
 
-      Terminal.command_output result.output if print_command_output
+      Terminal.command_output result.output if print_command_output && result.success?
       result
     end
 
