@@ -153,6 +153,7 @@ class Terminal::UI
 
   # Return display width of a unicode string(special CJK language)
   private def display_width(text, ambiguous = 1, overwrite = {} of Int32 => Int32)
+    text = " #{text.strip} "
     res = text.codepoints.reduce(0) do |total_width, codepoint|
       index_or_value = UNICODE_INDEX
 
