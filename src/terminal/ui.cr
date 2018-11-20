@@ -33,6 +33,7 @@ class Terminal::UI
   # Print a header a text in a box
   #   use this if this message is really important
   def header(message)
+    message = " #{message.strip} "
     message_width = display_width(message)
     header_line = "+" + "-" * message_width + "+"
     text = "|#{message}|"
@@ -153,7 +154,6 @@ class Terminal::UI
 
   # Return display width of a unicode string(special CJK language)
   private def display_width(text, ambiguous = 1, overwrite = {} of Int32 => Int32)
-    text = " #{text.strip} "
     res = text.codepoints.reduce(0) do |total_width, codepoint|
       index_or_value = UNICODE_INDEX
 
