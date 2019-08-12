@@ -57,9 +57,9 @@ describe Terminal do
       title = "Install"
       Terminal.header title
 
-      r.gets.should eq "+-------+"
-      r.gets.should eq "|Install|"
-      r.gets.should eq "+-------+"
+      r.gets.should eq "+---------+"
+      r.gets.should eq "| Install |"
+      r.gets.should eq "+---------+"
     end
   end
 
