@@ -49,13 +49,13 @@ module Terminal
 
     class Result
       def self.new(process : Process)
-        start_time = Time.now
-        output = process.output.gets_to_end.strip
-        error = process.error.gets_to_end.strip
-        status = process.wait
-        runtime = Time.now - start_time
+        elapsed_time = Time.measure do
+          output = process.output.gets_to_end.strip
+          error = process.error.gets_to_end.strip
+          status = process.wait
+        end
 
-        new(status, output, error, runtime)
+        new(status, output, error, elapsed_time)
       end
 
       getter output

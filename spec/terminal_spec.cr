@@ -52,7 +52,7 @@ describe Terminal do
   it "should output header message" do
     IO.pipe do |r, w|
       Terminal.ui_logger(w)
-      time_field = Time.now.to_s("%F %T")
+      time_field = Time.local.to_s("%F %T")
 
       title = "Install"
       Terminal.header title
@@ -66,7 +66,7 @@ describe Terminal do
   it "should output command line" do
     IO.pipe do |r, w|
       Terminal.ui_logger(w)
-      time_field = Time.now.to_s("%F %T")
+      time_field = Time.local.to_s("%F %T")
 
       Terminal.command "crystal version"
       r.gets.should eq "\e[36m$ crystal version\e[0m"
@@ -101,7 +101,7 @@ describe Terminal do
   it "could show timestamp" do
     ENV["TERMINAL_UI_SHOW_TIMESTAMP"] = "1"
     IO.pipe do |r, w|
-      time_field = Time.now.to_s("%F %T")
+      time_field = Time.local.to_s("%F %T")
 
       Terminal.ui_logger(w)
       Terminal.disable_color
@@ -136,7 +136,7 @@ describe Terminal do
   it "could set custom output formatter" do
     ENV["TERMINAL_UI_SHOW_TIMESTAMP"] = "1"
     IO.pipe do |r, w|
-      time_field = Time.now.to_s("%F")
+      time_field = Time.local.to_s("%F")
       Terminal.ui_logger(w, Logger::Formatter.new { |severity, datetime, progname, message, io|
         io << "#{datetime.to_s("%F")} "
         io << message

@@ -159,7 +159,7 @@ class Terminal::UI
 
       codepoint_depth_offset = codepoint
       UNICODE_DEPTHS.each do |depth|
-        index_or_value = index_or_value[codepoint_depth_offset / depth]
+        index_or_value = index_or_value[codepoint_depth_offset // depth]
         codepoint_depth_offset = codepoint_depth_offset % depth
         break unless index_or_value.is_a?(Array)
       end
